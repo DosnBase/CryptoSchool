@@ -1,0 +1,9 @@
+{
+  "name": "cryptoschool",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-telegram-bot-api": "^0.61.0",
+    "axios": "^1.4.0"
+  }
+}
