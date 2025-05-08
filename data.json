@@ -1,0 +1,33 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "title": "What is Blockchain?",
+      "content": "A blockchain is a digital ledger where transactions are recorded securely. It’s decentralized, meaning no single entity controls it. Example: Bitcoin uses blockchain to track transactions.",
+      "level": "beginner",
+      "test": [
+        {"question": "What is blockchain?", "options": ["Bank", "Digital ledger", "Crypto"], "answer": "Digital ledger"},
+        {"question": "Who verifies transactions?", "options": ["Banks", "Miners", "Hackers"], "answer": "Miners"}
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Technical Analysis",
+      "content": "Learn to read candlestick charts and use indicators like RSI to predict price movements.",
+      "level": "advanced",
+      "test": [
+        {"question": "What does RSI show?", "options": ["Trend", "Overbought", "Volume"], "answer": "Overbought"}
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "12345",
+      "username": "TestUser",
+      "level": "beginner",
+      "points": 0,
+      "yar": 10000,
+      "trades": []
+    }
+  ]
+}
