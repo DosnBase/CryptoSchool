@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crypto School</title>
+  <style>
+    body { background: #1a1a1a; color: #fff; font-family: Arial; text-align: center; margin: 0; }
+    h1 { color: #00ff88; }
+    .menu { display: flex; justify-content: center; gap: 10px; margin: 20px; }
+    button { background: #00b7eb; padding: 15px; border: none; cursor: pointer; border-radius: 10px; font-size: 16px; }
+    button:hover { background: #0099cc; }
+    #content { margin: 20px; }
+    .lesson-card { background: #2a2a2a; padding: 10px; margin: 10px; border-radius: 5px; }
+    .yar { color: #cc33ff; }
+  </style>
+</head>
+<body>
+  <h1>Crypto School</h1>
+  <div class="menu">
+    <button onclick="showLessons()">Lessons</button>
+    <button onclick="showSimulator()">Simulator</button>
+    <button onclick="showRanking()">Ranking</button>
+    <button onclick="shareAchievement()">Share</button>
+  </div>
+  <div id="content"></div>
+
+  <script>
+    let user = { id: '12345', yar: 10000 }; // Тестовый пользователь
+
+    async function showLessons() {
+      const response = await fetch('/lessons');
+      const lessons = await response.json();
+      let html = '<h2>Lessons</h2>';
+      lessons.forEach(lesson => {
+        html += `<div class="lesson-card">${lesson.title}<br>${lesson.content}<br><button onclick="takeTest(${lesson.id})">Take Test</button></div>`;
+      });
+      document.getElementById('content').innerHTML = html;
+    }
+
+    function takeTest(lessonId) {
+      document.getElementById('content').innerHTML = `Test for Lesson ${lessonId}<br>Answer questions to earn 10 YAR!`;
+    }
+
+    function showSimulator() {
+      document.getElementById('content').innerHTML = `
+        <h2>Trading Simulator</h2>
+        <p class="yar">Balance: ${user.yar} YAR</p>
+        <div id="tradingview_widget"></div>
+        <button onclick="trade()">Trade</button>
+        <button onclick="stake()">Stake</button>
+        <button onclick="farm()">Farm</button>
+      `;
+      loadTradingView();
+    }
+
+    function trade() {
+      user.yar += 50;
+      document.getElementById('content').innerHTML += `<p class="yar">+50 YAR!</p>`;
+    }
+
+    function stake() {
+      user.yar += 100;
+      document.getElementById('content').innerHTML += `<p class="yar">Staked! +100 YAR!</p>`;
+    }
+
+    function farm() {
+      user.yar += 10;
+      document.getElementById('content').innerHTML += `<p class="yar">Farmed! +10 YAR!</p>`;
+    }
+
+    async function showRanking() {
+      const response = await fetch('/users');
+      const users = await response.json();
+      let html = '<h2>Ranking</h2>';
+      users.forEach(u => {
+        html += `<p>${u.username}: ${u.points} points (${u.level})</p>`;
+      });
+      document.getElementById('content').innerHTML = html;
+    }
+
+    function shareAchievement() {
+      alert('Share: I earned 500 YAR in Crypto School! 🚀');
+    }
+
+    function loadTradingView() {
+      const script = document.createElement('script');
+      script.src = 'https://s3.tradingview.com/tv.js';
+      script.onload = () => {
+        new TradingView.widget({
+          "width": 500,
+          "height": 400,
+          "symbol": "BINANCE:BTCUSDT",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "dark",
+          "style": "1",
+          "locale": "en",
+          "toolbar_bg": "#f1f3f6",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "container_id": "tradingview_widget"
+        });
+      };
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</html>
