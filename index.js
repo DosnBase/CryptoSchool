@@ -3,7 +3,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 
 const app = express();
-const token = '7809841186:AAERLPyBh4g9dQQVwKQfOiszhcJ4TSNl0pU'; // Токен твоего бота
+const token = '; // Токен твоего бота
 const bot = new TelegramBot(token, { polling: true });
 
 app.use(express.static('public')); // Папка для HTML/CSS/JS
